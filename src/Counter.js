@@ -5,9 +5,14 @@ export default function Counter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    let intervalId = setInterval(() => {
       setCount((current) => current + 1);
     }, 1000);
+
+    return () => {
+      console.log("component unmount");
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
