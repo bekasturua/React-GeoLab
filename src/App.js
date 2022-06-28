@@ -20,9 +20,12 @@ function App() {
         >
           Learn React
         </a>
-        {buttons.map((item, index) => (
-          <Button key={index} title={item} />
-        ))}
+        {buttons.map((item, index) => {
+          if (index % 2 === 0) {
+            return <Button key={index} title={item} />;
+          }
+          return null;
+        })}
       </header>
     </div>
   );
