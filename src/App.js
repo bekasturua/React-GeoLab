@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   function onChangeClick(e) {
-    setCount(100);
+    setCount(count + 1);
   }
 
   return (
