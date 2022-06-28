@@ -20,8 +20,8 @@ function App() {
         >
           Learn React
         </a>
-        {buttons.map((item) => (
-          <Button title={item} />
+        {buttons.map((item, index) => (
+          <Button key={index} title={item} />
         ))}
       </header>
     </div>
