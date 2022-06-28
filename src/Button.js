@@ -1,5 +1,5 @@
-function Button() {
-  return <button>Test</button>;
+function Button(props) {
+  return <button>{props.title}</button>;
 }
 
 export default Button;
