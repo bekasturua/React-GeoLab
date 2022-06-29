@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 const ITEMS = [
   {
     id: 1,
@@ -26,7 +28,7 @@ function TodoApp() {
     <div>
       <ul>
         {ITEMS.map((item) => (
-          <li className={item.completed ? "completed" : ""}>
+          <li className={classNames({ completed: item.completed })}>
             <input type="checkbox" />
             {item.title}
             <button>Delete</button>
