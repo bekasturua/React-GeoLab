@@ -60,8 +60,12 @@ function TodoApp() {
 
   function onItemDelete(itemId) {
     const newItems = todos.filter((item) => item.id !== itemId);
-    setTodos(newItems)
+    setTodos(newItems);
   }
+
+  const totalItem = todos.length;
+  const itemsCompleted = todos.filter((item) => item.completed).length;
+  const itemsNotCompleted = todos.filter((item) => !item.completed).length;
 
   return (
     <div>
@@ -91,6 +95,8 @@ function TodoApp() {
           </li>
         ))}
       </ul>
+      სულ: {totalItem}, დასრულებული: {itemsCompleted}, დაუსრულებელი:{" "}
+      {itemsNotCompleted}
     </div>
   );
 }
