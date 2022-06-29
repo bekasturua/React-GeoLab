@@ -42,8 +42,15 @@ function TodoApp() {
     e.preventDefault();
 
     const newItems = [
-        
+      {
+        id: Date.now(),
+        title: value,
+        completed: false,
+      },
+      ...todos,
     ];
+    setTodos(newItems);
+    setValue("");
   }
 
   return (
