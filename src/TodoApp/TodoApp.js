@@ -14,6 +14,11 @@ const ITEMS = [
     title: "lorem ipsum 33",
     completed: true,
   },
+  {
+    id: 4,
+    title: "lorem ipsum 44",
+    completed: true,
+  },
 ];
 
 function TodoApp() {
@@ -21,9 +26,9 @@ function TodoApp() {
     <div>
       <ul>
         {ITEMS.map((item) => (
-          <li>
+          <li className={item.completed ? "completed" : ""}>
             <input type="checkbox" />
-            lorem ipsum
+            {item.title}
             <button>Delete</button>
           </li>
         ))}
