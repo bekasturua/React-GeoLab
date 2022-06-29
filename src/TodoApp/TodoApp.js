@@ -58,6 +58,11 @@ function TodoApp() {
     setValue("");
   }
 
+  function onItemDelete(itemId) {
+    const newItems = todos.filter((item) => item.id !== itemId);
+    setTodos(newItems)
+  }
+
   return (
     <div>
       <div style={{ padding: "20px" }}>
@@ -82,7 +87,7 @@ function TodoApp() {
               onChange={() => onItemChange(item)}
             />
             {item.title}
-            <button>Delete</button>
+            <button onClick={() => onItemDelete(item.id)}>Delete</button>
           </li>
         ))}
       </ul>
