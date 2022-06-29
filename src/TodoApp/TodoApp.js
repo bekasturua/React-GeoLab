@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useState } from "react";
 
 const ITEMS = [
   {
@@ -24,12 +25,49 @@ const ITEMS = [
 ];
 
 function TodoApp() {
+  const [todos, setTodos] = useState(ITEMS);
+  const [value, setValue] = useState("");
+
+  function onItemChange(clickedItem) {
+    const newValue = todos.map((item) => {
+      if (item.id === clickedItem.id) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
+    setTodos(newValue);
+  }
+
+  function onAddNewItem(e) {
+    e.preventDefault();
+
+    const newItems = [
+        
+    ];
+  }
+
   return (
     <div>
+      <div style={{ padding: "20px" }}>
+        <form action="" onSubmit={onAddNewItem}>
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+        </form>
+      </div>
       <ul>
-        {ITEMS.map((item) => (
-          <li className={classNames({ completed: item.completed })}>
-            <input type="checkbox" />
+        {todos.map((item) => (
+          <li
+            key={item.id}
+            className={classNames({ completed: item.completed })}
+          >
+            <input
+              type="checkbox"
+              checked={item.completed}
+              onChange={() => onItemChange(item)}
+            />
             {item.title}
             <button>Delete</button>
           </li>
