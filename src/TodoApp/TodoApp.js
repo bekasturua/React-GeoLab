@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
+import SelectTheme from "./Compomemts/SelectTheme";
 
 const ITEMS = [
   {
@@ -97,6 +98,7 @@ function TodoApp() {
       </ul>
       სულ: {totalItem}, დასრულებული: {itemsCompleted}, დაუსრულებელი:{" "}
       {itemsNotCompleted}
+      <SelectTheme />
     </div>
   );
 }

@@ -1,19 +1,18 @@
+import { useState } from "react";
 import "./App.css";
-import Button from "./Button";
-import Counter from "./Counter";
-import { useEffect, useState } from "react";
+import ThemeContext from "./TodoApp/Compomemts/Context/ThremeContext";
 import TodoApp from "./TodoApp/TodoApp";
 
-function App() {
-  const [showCount, setShowCount] = useState(true);
 
-  return <TodoApp />;
-  // return (
-  //   <div>
-  //     {showCount && <Counter />}
-  //     <Button onClick={() => setShowCount(false)}>Hide counter</Button>
-  //   </div>
-  // );
+
+function App() {
+  const [theme, setTheme] = useState("dark");
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <TodoApp />
+    </ThemeContext.Provider>
+  );
 }
 
 export default App;
