@@ -1,15 +1,26 @@
 import { useState } from "react";
+import UserContext from "./Compomemts/Context/userContext";
+import { useContext } from "react";
 
 export default function Auth() {
   const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
+  const userContext = useContext(UserContext);
 
   function onSubmit(e) {
     e.preventDefault();
 
-    fetch("/").then((Response) => {
-        
-    });
+    // fetch("example.com/login").then((Response) => {
+
+    // });
+
+    if (username === "test" && password === "test") {
+      userContext.setUser({
+        username: "test",
+        name: "Beka",
+        email: " testexample.com",
+      });
+    }
   }
 
   return (
@@ -28,6 +39,7 @@ export default function Auth() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </p>
+      <button type="submit">Submit</button>
     </form>
   );
 }

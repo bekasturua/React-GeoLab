@@ -1,7 +1,8 @@
 import classNames from "classnames";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import UserContext from "./Compomemts/Context/userContext";
 import SelectTheme from "./Compomemts/SelectTheme";
-
+import Auth from "./Auth";
 const ITEMS = [
   {
     id: 1,
@@ -29,9 +30,12 @@ function TodoApp() {
   const [todos, setTodos] = useState(ITEMS);
   const [value, setValue] = useState("");
   const inputRef = useRef();
+  const userContext = useContext(UserContext);
 
   useEffect(() => {
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
 
   function onItemChange(clickedItem) {
@@ -67,6 +71,10 @@ function TodoApp() {
   const totalItem = todos.length;
   const itemsCompleted = todos.filter((item) => item.completed).length;
   const itemsNotCompleted = todos.filter((item) => !item.completed).length;
+
+  if (!userContext.user) {
+    return <Auth />;
+  }
 
   return (
     <div>
