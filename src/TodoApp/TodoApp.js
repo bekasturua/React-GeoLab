@@ -4,6 +4,7 @@ import UserContext from "./Compomemts/Context/userContext";
 import SelectTheme from "./Compomemts/SelectTheme";
 import Auth from "./Auth";
 import axios from "axios";
+import ApiRequest from "./ApiRequest";
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
@@ -12,6 +13,11 @@ function TodoApp() {
   const userContext = useContext(UserContext);
 
   useEffect(() => {
+    ApiRequest("GET", "tasks")
+      .then((response) => {
+        setTodos(response.data.data);
+      })
+      .catch((error) => console.log(error));
     axios
       .get("https://us-central1-js04-b4877.cloudfunctions.net/tasks")
       .then((response) => {
@@ -44,10 +50,9 @@ function TodoApp() {
     setTodos(newItems);
     setValue("");
 
-    axios
-      .post("https://us-central1-js04-b4877.cloudfunctions.net/tasks/create", {
-        text: value,
-      })
+    ApiRequest("POST", "tasks/create", {
+      text: value,
+    })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
