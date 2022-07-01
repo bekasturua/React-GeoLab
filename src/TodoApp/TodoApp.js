@@ -5,34 +5,20 @@ import SelectTheme from "./Compomemts/SelectTheme";
 import Auth from "./Auth";
 import axios from "axios";
 
-const ITEMS = [
-  {
-    id: 1,
-    title: "lorem ipsum 11",
-    completed: false,
-  },
-  {
-    id: 2,
-    title: "lorem ipsum 22",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "lorem ipsum 33",
-    completed: true,
-  },
-  {
-    id: 4,
-    title: "lorem ipsum 44",
-    completed: true,
-  },
-];
-
 function TodoApp() {
-  const [todos, setTodos] = useState(ITEMS);
+  const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
   const inputRef = useRef();
   const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("https://us-central1-js04-b4877.cloudfunctions.net/tasks")
+      .then((response) => {
+        setTodos(response.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   function onItemChange(clickedItem) {
     const newValue = todos.map((item) => {
@@ -59,7 +45,7 @@ function TodoApp() {
     setValue("");
 
     axios
-      .post("https://us-centrall-js04-04877.cloudfunctions.net/tasks/create", {
+      .post("https://us-central1-js04-b4877.cloudfunctions.net/tasks/create", {
         text: value,
       })
       .then((response) => console.log(response))
@@ -102,7 +88,7 @@ function TodoApp() {
               checked={item.completed}
               onChange={() => onItemChange(item)}
             />
-            {item.title}
+            {item.text}
             <button onClick={() => onItemDelete(item.id)}>Delete</button>
           </li>
         ))}
