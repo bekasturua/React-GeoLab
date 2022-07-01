@@ -3,6 +3,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import UserContext from "./Compomemts/Context/userContext";
 import SelectTheme from "./Compomemts/SelectTheme";
 import Auth from "./Auth";
+import axios from "axios";
+
 const ITEMS = [
   {
     id: 1,
@@ -32,12 +34,6 @@ function TodoApp() {
   const inputRef = useRef();
   const userContext = useContext(UserContext);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   function onItemChange(clickedItem) {
     const newValue = todos.map((item) => {
       if (item.id === clickedItem.id) {
@@ -61,6 +57,13 @@ function TodoApp() {
     ];
     setTodos(newItems);
     setValue("");
+
+    axios
+      .post("https://us-centrall-js04-04877.cloudfunctions.net/tasks/create", {
+        text: value,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 
   function onItemDelete(itemId) {
@@ -72,9 +75,9 @@ function TodoApp() {
   const itemsCompleted = todos.filter((item) => item.completed).length;
   const itemsNotCompleted = todos.filter((item) => !item.completed).length;
 
-  if (!userContext.user) {
-    return <Auth />;
-  }
+  // if (!userContext.user) {
+  //   return <Auth />;
+  // }
 
   return (
     <div>
