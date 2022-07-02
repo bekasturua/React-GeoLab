@@ -12,15 +12,17 @@ function TodoApp() {
   const [value, setValue] = useState("");
   const inputRef = useRef();
   const userContext = useContext(UserContext);
-  const [date] = useRequest("GET", "tasks");
+  const [data] = useRequest("GET", "tasks");
+
+  console.log("data", data);
 
   useEffect(() => {
-    ApiRequest("GET", "tasks")
-      .then((response) => {
-        setTodos(response.data.data);
-      })
-      .catch((error) => console.log(error));
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
+
+
 
   function onItemChange(clickedItem) {
     const newValue = todos.map((item) => {
@@ -79,7 +81,7 @@ function TodoApp() {
         </form>
       </div>
       <ul>
-        {todos.map((item) => (
+        {data.map((item) => (
           <li
             key={item.id}
             className={classNames({ completed: item.completed })}
