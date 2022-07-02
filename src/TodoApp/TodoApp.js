@@ -2,8 +2,6 @@ import classNames from "classnames";
 import { useContext, useEffect, useRef, useState } from "react";
 import UserContext from "./Compomemts/Context/userContext";
 import SelectTheme from "./Compomemts/SelectTheme";
-import Auth from "./Auth";
-import axios from "axios";
 import ApiRequest from "./ApiRequest";
 import useRequest from "./hooks/useRequest";
 
@@ -11,7 +9,7 @@ function TodoApp() {
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
   const inputRef = useRef();
-  const userContext = useContext(UserContext);
+  // const userContext = useContext(UserContext);
   const [data, loading] = useRequest("GET", "tasks");
 
   console.log("data", data);
@@ -72,9 +70,7 @@ function TodoApp() {
   //   return <Auth />;
   // }
 
-  if (loading) {
-    return <p>loading...</p>;
-  }
+  
 
   return (
     <div>
@@ -88,22 +84,26 @@ function TodoApp() {
           />
         </form>
       </div>
-      <ul>
-        {todos.map((item) => (
-          <li
-            key={item.id}
-            className={classNames({ completed: item.completed })}
-          >
-            <input
-              type="checkbox"
-              checked={item.completed}
-              onChange={() => onItemChange(item)}
-            />
-            {item.text}
-            <button onClick={() => onItemDelete(item.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {todos.map((item) => (
+            <li
+              key={item.id}
+              className={classNames({ completed: item.completed })}
+            >
+              <input
+                type="checkbox"
+                checked={item.completed}
+                onChange={() => onItemChange(item)}
+              />
+              {item.text}
+              <button onClick={() => onItemDelete(item.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      )}
       სულ: {totalItem}, დასრულებული: {itemsCompleted}, დაუსრულებელი:{" "}
       {itemsNotCompleted}
       <SelectTheme />
