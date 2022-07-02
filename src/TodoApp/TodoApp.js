@@ -22,7 +22,11 @@ function TodoApp() {
     }
   }, []);
 
-
+  useEffect(() => {
+    if (data) {
+      setTodos(data);
+    }
+  }, [data]);
 
   function onItemChange(clickedItem) {
     const newValue = todos.map((item) => {
@@ -81,7 +85,7 @@ function TodoApp() {
         </form>
       </div>
       <ul>
-        {data.map((item) => (
+        {todos.map((item) => (
           <li
             key={item.id}
             className={classNames({ completed: item.completed })}
