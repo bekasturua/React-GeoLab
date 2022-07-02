@@ -12,7 +12,7 @@ function TodoApp() {
   const [value, setValue] = useState("");
   const inputRef = useRef();
   const userContext = useContext(UserContext);
-  const [data] = useRequest("GET", "tasks");
+  const [data, loading] = useRequest("GET", "tasks");
 
   console.log("data", data);
 
@@ -71,6 +71,10 @@ function TodoApp() {
   // if (!userContext.user) {
   //   return <Auth />;
   // }
+
+  if (loading) {
+    return <p>loading...</p>;
+  }
 
   return (
     <div>
