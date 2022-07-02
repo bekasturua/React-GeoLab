@@ -5,21 +5,17 @@ import SelectTheme from "./Compomemts/SelectTheme";
 import Auth from "./Auth";
 import axios from "axios";
 import ApiRequest from "./ApiRequest";
+import useRequest from "./hooks/useRequest";
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
   const inputRef = useRef();
   const userContext = useContext(UserContext);
+  const [date] = useRequest("GET", "tasks");
 
   useEffect(() => {
     ApiRequest("GET", "tasks")
-      .then((response) => {
-        setTodos(response.data.data);
-      })
-      .catch((error) => console.log(error));
-    axios
-      .get("https://us-central1-js04-b4877.cloudfunctions.net/tasks")
       .then((response) => {
         setTodos(response.data.data);
       })
