@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import UserContext from "./context/UserContext";
 
 export default function Auth() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const userContext = useContext(UserContext);
 
   function onSubmit(e) {
@@ -13,12 +13,12 @@ export default function Auth() {
 
     // })
 
-    if (username === 'test' && password === 'test') {
+    if (username === "test" && password === "test") {
       userContext.setUser({
-        username: 'test',
-        name: 'Beka',
-        email: 'test@example.com'
-      })
+        username: "test",
+        name: "Beka",
+        email: "test@example.com",
+      });
     }
   }
 
@@ -28,17 +28,17 @@ export default function Auth() {
         <input
           type="text"
           value={username}
-          onChange={e => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </p>
       <p>
         <input
           type="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </p>
       <button type="submit">Submit</button>
     </form>
-  )
+  );
 }

@@ -6,8 +6,8 @@ export default function SelectTheme() {
 
   return (
     <div>
-      <button onClick={() => themeContext.setTheme('light')}>light</button>
-      <button onClick={() => themeContext.setTheme('dark')}>dark</button>
+      <button onClick={() => themeContext.setTheme("light")}>light</button>
+      <button onClick={() => themeContext.setTheme("dark")}>dark</button>
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import { forwardRef, useContext, useImperativeHandle, useRef } from "react"
+import { forwardRef, useContext, useImperativeHandle, useRef } from "react";
 import ThemeContext from "../../context/ThemeContext";
-import styles from './Input.module.scss';
+import styles from "./Input.module.scss";
 
 function Input(props, ref) {
   const inputRef = useRef();
@@ -8,24 +8,20 @@ function Input(props, ref) {
 
   useImperativeHandle(ref, () => ({
     focus: () => {
-      console.log('focus input');
+      console.log("focus input");
       inputRef.current.focus();
     },
-    
+
     test: () => {
-      alert('test');
-    }
-  }))
+      alert("test");
+    },
+  }));
 
   return (
     <div>
-      <input
-        {...props}
-        ref={inputRef}
-        className={styles.input}
-      />
+      <input {...props} ref={inputRef} className={styles.input} />
     </div>
-  )
+  );
 }
 
 export default forwardRef(Input);
