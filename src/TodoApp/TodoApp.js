@@ -4,15 +4,16 @@ import UserContext from "./Compomemts/Context/userContext";
 import SelectTheme from "./Compomemts/SelectTheme";
 import ApiRequest from "./ApiRequest";
 import useRequest from "./hooks/useRequest";
+import { useQuery } from "react-query";
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
   const inputRef = useRef();
   // const userContext = useContext(UserContext);
-  const [data, loading] = useRequest("GET", "tasks");
+  // const [data, loading] = useRequest("GET", "tasks");
+  const [data] = useQuery("tasks", () => ApiRequest("GET", "tasks"));
 
-  console.log("data", data);
 
   useEffect(() => {
     if (inputRef.current) {
