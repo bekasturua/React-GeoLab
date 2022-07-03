@@ -12,8 +12,9 @@ function TodoApp() {
   const inputRef = useRef();
   // const userContext = useContext(UserContext);
   // const [data, loading] = useRequest("GET", "tasks");
-  const [data] = useQuery("tasks", () => ApiRequest("GET", "tasks"));
-
+  const { data, isLoading } = useQuery("tasks", () =>
+    ApiRequest("GET", "tasks")
+  );
 
   useEffect(() => {
     if (inputRef.current) {
@@ -83,7 +84,7 @@ function TodoApp() {
           />
         </form>
       </div>
-      {loading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <ul>
