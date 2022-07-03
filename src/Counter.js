@@ -6,22 +6,20 @@ export default function Counter() {
 
   useEffect(() => {
     let intervalId = setInterval(() => {
-      setCount((current) => current + 1);
+      console.log('test');
+      setCount(current => current + 1)
     }, 1000);
 
     return () => {
-      console.log("component unmount");
-      clearInterval(intervalId);
+      console.log('component unmount');
+      clearInterval(intervalId)
     };
   }, []);
 
   return (
     <div className="App">
-      Current value: {count}
-      <Button
-        onClick={() => setCount((current) => current + 1)}
-        title="update count"
-      ></Button>
+      current value: {count}
+      <Button onClick={() => setCount(current => current + 1)} title="update count"></Button>
     </div>
   );
 }

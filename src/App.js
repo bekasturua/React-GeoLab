@@ -1,24 +1,30 @@
-import { useState } from "react";
-import { QueryClient, QuaryClientProvider } from "react-query";
-import "./App.css";
-import ThemeContext from "./TodoApp/Compomemts/Context/ThremeContext";
-import UserContext from "./TodoApp/Compomemts/Context/userContext";
-import TodoApp from "./TodoApp/TodoApp";
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import './App.scss';
+import ThemeContext from './todoapp/context/ThemeContext';
+import UserContext from './todoapp/context/UserContext';
+import TodoApp from './todoapp/TodoApp';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    }
+  }
+});
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState('dark');
   const [user, setUser] = useState(null);
 
   return (
-    <QuaryClientProvider client={queryClient}>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <UserContext.Provider value={{ user, setUser }}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeContext.Provider value={{theme, setTheme}}>
+        <UserContext.Provider value={{user, setUser}}>
           <TodoApp />
         </UserContext.Provider>
       </ThemeContext.Provider>
-    </QuaryClientProvider>
+    </QueryClientProvider>
   );
 }
 
