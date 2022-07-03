@@ -70,8 +70,6 @@ function TodoApp() {
   //   return <Auth />;
   // }
 
-  
-
   return (
     <div>
       <div style={{ padding: "20px" }}>
