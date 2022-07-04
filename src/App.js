@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import ThemeContext from "./todoapp/context/ThemeContext";
 import UserContext from "./todoapp/context/UserContext";
@@ -18,13 +19,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <TodoApp />
-        </UserContext.Provider>
-      </ThemeContext.Provider>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+          <UserContext.Provider value={{ user, setUser }}>
+            <TodoApp />
+          </UserContext.Provider>
+        </ThemeContext.Provider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 }
 
