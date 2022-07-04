@@ -25,6 +25,12 @@ function TodoApp() {
   const deleteTodoMutation = useMutation((id) => {
     return apiRequest("POST", `delete/${id}`);
   });
+  const checkTodoMutation = useMutation((id) => {
+    return apiRequest("POST", `check/${id}`);
+  });
+  const uncheckTodoMutation = useMutation((id) => {
+    return apiRequest("POST", `uncheck/${id}`);
+  });
   const queryClient = useQueryClient();
 
   console.log("data", data);
@@ -42,6 +48,13 @@ function TodoApp() {
   }, [data]);
 
   function onItemChange(clickedItem) {
+    const correctItem = todos.find((item) => item.id == clickedItem.id);
+
+    if (clickedItem.completed) {
+      uncheckTodoMutation.mutate(clickedItem.id);
+    } else {
+      checkTodoMutation.mutate(clickedItem.id);
+    }
     const newValue = todos.map((item) => {
       if (item.id === clickedItem.id) {
         item.completed = !item.completed;
@@ -69,6 +82,7 @@ function TodoApp() {
   }
 
   function onItemDelete(itemId) {
+    deleteTodoMutation.mutateAsync(itemId);
     const newItems = todos.filter((item) => item.id !== itemId);
     setTodos(newItems);
   }
