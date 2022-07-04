@@ -21,6 +21,10 @@ function TodoApp() {
       text,
     });
   });
+
+  const deleteTodoMutation = useMutation((id) => {
+    return apiRequest("POST", `delete/${id}`);
+  });
   const queryClient = useQueryClient();
 
   console.log("data", data);
