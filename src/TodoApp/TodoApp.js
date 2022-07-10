@@ -1,14 +1,16 @@
 import classNames from "classnames";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import Input from "./components/Input/Input";
 import SelectTheme from "./components/SelectTheme";
 import UserContext from "./context/UserContext";
 import apiRequest from "./apiRequest";
 import useRequest from "./hooks/useRequest";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import todoReducer from "./todo.reducer";
 
 function TodoApp() {
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
+  const [todos, dispatch] = useReducer(todoReducer, []);
   const [value, setValue] = useState("");
   const inputRef = useRef();
   // const userContext = useContext(UserContext);
@@ -43,7 +45,7 @@ function TodoApp() {
 
   useEffect(() => {
     if (data) {
-      setTodos(data);
+      dispatch({ type: "set_todos", data: data });
     }
   }, [data]);
 
@@ -61,7 +63,7 @@ function TodoApp() {
       }
       return item;
     });
-    setTodos(newValue);
+    // setTodos(newValue);
   }
 
   async function onAddNewItem(e) {
@@ -75,16 +77,23 @@ function TodoApp() {
     //   ...todos,
     // ]
     // setTodos(newItems);
+
+    const newItem = {
+      id: Date.now(),
+      text: value,
+      completed: false,
+    };
+    dispatch({ type: "add_todo", data: newItem });
     setValue("");
 
     await addTodoMutation.mutateAsync(value);
-    queryClient.invalidateQueries("tasks");
+    // queryClient.invalidateQueries("tasks");
   }
 
   function onItemDelete(itemId) {
     deleteTodoMutation.mutateAsync(itemId);
     const newItems = todos.filter((item) => item.id !== itemId);
-    setTodos(newItems);
+    // setTodos(newItems);
   }
 
   const totalItem = todos.length;
