@@ -155,7 +155,7 @@ function TodoApp() {
       სულ: {totalItem}, დასრულებული: {itemsCompleted}, დაუსრულებელი:{" "}
       {itemsNotCompleted}
       {/* <SelectTheme onClick={memoizedCallback} /> when we used memos */}
-      <SelectTheme onClick={memoizedCallback} />
+      <SelectTheme />
     </div>
   );
 }
