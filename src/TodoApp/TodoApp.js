@@ -1,5 +1,12 @@
 import classNames from "classnames";
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import Input from "./components/Input/Input";
 import SelectTheme from "./components/SelectTheme";
 import UserContext from "./context/UserContext";
@@ -104,6 +111,13 @@ function TodoApp() {
   //   return <Auth />
   // }
 
+  // const memoizedCallback = useCallback(
+  //   () => {
+  //     //...
+  //   },
+  //   { a, b }
+  // );
+
   return (
     <div>
       <div style={{ padding: "20px" }}>
@@ -140,7 +154,8 @@ function TodoApp() {
       <button onClick={() => refetch()}>refresh</button>
       სულ: {totalItem}, დასრულებული: {itemsCompleted}, დაუსრულებელი:{" "}
       {itemsNotCompleted}
-      <SelectTheme />
+      {/* <SelectTheme onClick={memoizedCallback} /> when we used memos */}
+      <SelectTheme onClick={memoizedCallback} />
     </div>
   );
 }
